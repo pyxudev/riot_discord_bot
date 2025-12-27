@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`,
       {
         headers: {
-          "X-Riot-Token": process.env.RIOT_API_KEY!
+          "X-Riot-Token": process.env.NEXT_PUBLIC_RIOT_API_KEY!
         },
       }
     );
