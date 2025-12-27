@@ -70,7 +70,7 @@ export async function POST(req: Request) {
     };
 
     await put(filename, JSON.stringify(data, null, 2), {
-      access: "private",
+      access: "public",
       contentType: "application/json",
     });
 
