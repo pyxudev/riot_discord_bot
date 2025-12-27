@@ -22,13 +22,7 @@ export async function POST(req: Request) {
       `https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${gameName}/${tagLine}`,
       {
         headers: {
-          "User-Agent":
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-          "Accept-Language": "ja-JP,ja;q=0.9,en-US;q=0.8,en;q=0.7",
-          "Accept-Charset":
-            "application/x-www-form-urlencoded; charset=UTF-8",
-          "Origin": "https://developer.riotgames.com",
-          "X-Riot-Token": process.env.RIOT_API_KEY!,
+          "X-Riot-Token": process.env.RIOT_API_KEY!
         },
       }
     );
