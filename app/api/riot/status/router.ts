@@ -7,7 +7,7 @@ const sleep = (ms: number) =>
 export async function POST() {
   try {
     const riotHeaders = {
-      "X-Riot-Token": process.env.NEXT_PUBLIC_RIOT_API_KEY!,
+      "X-Riot-Token": process.env.RIOT_API_KEY!,
     };
 
     // ----------------------------
@@ -90,7 +90,7 @@ export async function POST() {
 平均KDA：${averageKDA.toFixed(2)}
 `;
 
-      await fetch(process.env.NEXT_PUBLIC_DISCORD_WEBHOOK_URL!, {
+      await fetch(process.env.DISCORD_WEBHOOK_URL!, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: message }),
