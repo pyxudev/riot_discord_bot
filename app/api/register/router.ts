@@ -1,6 +1,8 @@
 import { put, head } from "@vercel/blob";
 import { NextResponse } from "next/server";
 
+export const runtime = "nodejs";
+
 export async function POST(req: Request) {
   try {
     const { playerName, tagId } = await req.json();

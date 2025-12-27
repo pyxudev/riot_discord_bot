@@ -17,7 +17,7 @@ export default function RegisterForm() {
       },
       body: JSON.stringify({
         playerName,
-        tagId,
+        tagId
       }),
     });
 
