@@ -30,9 +30,9 @@ export async function POST() {
     // 各プレイヤー処理
     // ----------------------------
     for (const blob of blobs.blobs) {
-      const uuid = blob.pathname
-        .replace("players/", "")
-        .replace(".json", "");
+      const res = await fetch(blob.url);
+      const data = await res.json();
+      const { uuid, playerName, tagId } = data;
 
       // 直近10試合ID取得
       const gamesRes = await fetch(
@@ -81,8 +81,7 @@ export async function POST() {
       // ----------------------------
       // Discord 通知（UUID単位）
       // ----------------------------
-      const message = `UUID: ${uuid}
-直近 ${gameCount} 試合統計
+      const message = `${playerName}#${tagId} の直近 ${gameCount} 試合統計
 勝利数：${sumWin}
 合計キル数：${sumKills}
 合計デス数：${sumDeaths}
