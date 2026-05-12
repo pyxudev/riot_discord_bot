@@ -29,6 +29,7 @@ export async function POST() {
     // ----------------------------
     // 各プレイヤー処理
     // ----------------------------
+    let message = "今週のKDA(ノーマル・ランク)発表！\n";
     for (const blob of blobs.blobs) {
       const res = await fetch(blob.url);
       const data = await res.json();
@@ -81,7 +82,8 @@ export async function POST() {
       // ----------------------------
       // Discord 通知（UUID単位）
       // ----------------------------
-      const message = `${playerName}#${tagId} の直近 ${gameCount} 試合統計
+      message += `
+${playerName}#${tagId} の直近 ${gameCount} 試合統計
 勝利数：${sumWin}
 合計キル数：${sumKills}
 合計デス数：${sumDeaths}
@@ -89,15 +91,17 @@ export async function POST() {
 平均KDA：${averageKDA.toFixed(2)}
 `;
 
-      await fetch(process.env.DISCORD_WEBHOOK_URL!, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: message }),
-      });
-
       processed++;
       await sleep(1500);
     }
+
+    message += "\n低いなと感じた人はもっと頑張りましょう！\n統計に参加：https://riot-discord-bot.vercel.app";
+
+    await fetch(process.env.DISCORD_WEBHOOK_URL!, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ content: message }),
+    });
 
     return NextResponse.json({
       success: true,
@@ -105,6 +109,7 @@ export async function POST() {
     });
   } catch (e) {
     console.error(e);
+    console.log("Error processing player data");
     return NextResponse.json(
       { error: "Server error" },
       { status: 500 }
